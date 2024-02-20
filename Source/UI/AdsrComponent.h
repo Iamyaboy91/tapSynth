@@ -15,11 +15,11 @@
 //==============================================================================
 /*
 */
-class AdsrCpmponent  : public juce::Component
+class AdsrComponent  : public juce::Component
 {
 public:
-    AdsrCpmponent(juce::AudioProcessorValueTreeState& apvts);
-    ~AdsrCpmponent() override;
+    AdsrComponent(juce::AudioProcessorValueTreeState& apvts);
+    ~AdsrComponent() override;
 
     void paint (juce::Graphics&) override;
     void resized() override;
@@ -41,5 +41,5 @@ private:
     std::unique_ptr<sliderAttachment> releaseAttachment;
    
     
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AdsrCpmponent)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AdsrComponent)
 };

@@ -9,10 +9,10 @@
 */
 
 #include <JuceHeader.h>
-#include "AdsrCpmponent.h"
+#include "AdsrComponent.h"
 
 //==============================================================================
-AdsrCpmponent::AdsrCpmponent(juce::AudioProcessorValueTreeState& apvts)
+AdsrComponent::AdsrComponent(juce::AudioProcessorValueTreeState& apvts)
 {
     using sliderAttachment = juce::AudioProcessorValueTreeState::SliderAttachment;
     
@@ -27,11 +27,11 @@ AdsrCpmponent::AdsrCpmponent(juce::AudioProcessorValueTreeState& apvts)
     setSliderParams(releaseSlider);
 }
 
-AdsrCpmponent::~AdsrCpmponent()
+AdsrComponent::~AdsrComponent()
 {
 }
 
-void AdsrCpmponent::paint (juce::Graphics& g)
+void AdsrComponent::paint (juce::Graphics& g)
 {
     g.fillAll(juce::Colours::black);
     
@@ -39,7 +39,7 @@ void AdsrCpmponent::paint (juce::Graphics& g)
 }
 
 
-void AdsrCpmponent::resized()
+void AdsrComponent::resized()
 {
     const auto bounds = getLocalBounds().reduced(10);
     const auto padding = 10;
@@ -53,7 +53,7 @@ void AdsrCpmponent::resized()
     sustainSlider.setBounds(decaySlider.getRight() + padding, SliderStartY, sliderWidth, SliderHeight);
     releaseSlider.setBounds(sustainSlider.getRight() + padding, SliderStartY, sliderWidth, SliderHeight);
 }
-void AdsrCpmponent::setSliderParams(juce::Slider& slider)
+void AdsrComponent::setSliderParams(juce::Slider& slider)
 {
     slider.setSliderStyle(juce::Slider::SliderStyle::LinearVertical);
     slider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, 50, 25);
