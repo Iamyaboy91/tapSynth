@@ -19,11 +19,16 @@
       <GROUP id="{3ACF6002-FECF-6D7E-10E9-6769AB07FC6C}" name="Data">
         <FILE id="HYa3CU" name="AdsrData.cpp" compile="1" resource="0" file="Source/Data/AdsrData.cpp"/>
         <FILE id="mFf9fa" name="AdsrData.h" compile="0" resource="0" file="Source/Data/AdsrData.h"/>
+        <FILE id="j6hkvo" name="OscData.cpp" compile="1" resource="0" file="Source/Data/OscData.cpp"/>
+        <FILE id="a9GdSa" name="OscData.h" compile="0" resource="0" file="Source/Data/OscData.h"/>
       </GROUP>
       <GROUP id="{BDD74332-1E67-71BA-D865-E1A277F1E5AD}" name="UI">
-        <FILE id="wsmtQW" name="AdsrCpmponent.cpp" compile="1" resource="0"
-              file="Source/UI/AdsrCpmponent.cpp"/>
-        <FILE id="tUMpu0" name="AdsrCpmponent.h" compile="0" resource="0" file="Source/UI/AdsrCpmponent.h"/>
+        <FILE id="wsmtQW" name="AdsrComponent.cpp" compile="1" resource="0"
+              file="Source/UI/AdsrComponent.cpp"/>
+        <FILE id="tUMpu0" name="AdsrComponent.h" compile="0" resource="0" file="Source/UI/AdsrComponent.h"/>
+        <FILE id="JwyGg0" name="OscComponent.cpp" compile="1" resource="0"
+              file="Source/UI/OscComponent.cpp"/>
+        <FILE id="LOTzaP" name="OscComponent.h" compile="0" resource="0" file="Source/UI/OscComponent.h"/>
       </GROUP>
     </GROUP>
   </MAINGROUP>
