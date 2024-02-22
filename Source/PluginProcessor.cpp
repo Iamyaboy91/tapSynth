@@ -163,10 +163,17 @@ void TapSynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juc
             auto& sustain = *apvts.getRawParameterValue("SUSTAIN");
             auto& release = *apvts.getRawParameterValue("RELEASE");
             
-            auto& oscWaveChoice = *apvts.getRawParameterValue("OSC1WAVETYPE");
             
-            voice -> update(attack.load(), decay.load(), sustain.load(), release.load());
+            auto& oscWaveChoice = *apvts.getRawParameterValue("OSC1WAVETYPE");
+            auto& fmDepth  = *apvts.getRawParameterValue("FMDEPTH");
+            auto& fmFreq = *apvts.getRawParameterValue("FMFREQ");
+
+
+            
             voice ->getOscillator().setWaveType(oscWaveChoice);
+            voice -> getOscillator().setFmParams(fmDepth, fmFreq);
+            voice -> update(attack.load(), decay.load(), sustain.load(), release.load());
+
             
 //          load()メソッドを使用するのはgetRawParameterが格納されている先がatomic class templateであり、通常のfloatよりも重いため。
         }
@@ -221,11 +228,17 @@ juce::AudioProcessorValueTreeState::ParameterLayout TapSynthAudioProcessor::crea
     
 //    OSC select
     params.push_back(std::make_unique<juce::AudioParameterChoice>("OSC", "Oscillator",juce::StringArray {"Sine","Saw","Square"}, 0));
+//    FM
+    params.push_back (std::make_unique<juce::AudioParameterFloat> ("FMFREQ", "FM Frequency", juce::NormalisableRange<float>{0.0f, 1000.0f }, 5.0f));
+    params.push_back (std::make_unique<juce::AudioParameterFloat> ("FMDEPTH", "FM Depth", juce::NormalisableRange<float>{0.0f, 1000.0f }, 500.0f));
+
 //    ADSR
-    params.push_back (std::make_unique<juce::AudioParameterFloat> ("ATTACK", "Attack", juce::NormalisableRange<float>{0.1f, 1.0f}, 0.1f));
+    params.push_back (std::make_unique<juce::AudioParameterFloat> ("ATTACK", "Attack", juce::NormalisableRange<float>{0.1f, 1000.0f}, 5.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat> ("DECAY", "Decay", juce::NormalisableRange<float> {0.1f, 1.0f}, 0.1f));
     params.push_back(std::make_unique<juce::AudioParameterFloat> ("SUSTAIN", "Sustain", juce::NormalisableRange<float> {0.1f, 1.0f}, 1.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("RELEASE", "Release", juce::NormalisableRange<float> {0.1f, 3.0f}, 0.4f));
+    
+    
     
     params.push_back(std::make_unique<juce::AudioParameterChoice>("OSC1WAVETYPE", "Osc 1 Wave Type", juce::StringArray{"Sine","Saw","Square"}, 0, " "));
     
