@@ -44,12 +44,6 @@ void OscData::setWaveType(const int choice)
     
 }
 
-void OscData::setWaveFrequency(const int midiNoteNumber)
-{
-    setFrequency(juce::MidiMessage::getMidiNoteInHertz (midiNoteNumber) + fmMod);
-    lastMidiNote = midiNoteNumber;
-}
-
 void OscData::getNextAudioBlock(juce::dsp::AudioBlock<float>& block)
 {
     for(int ch = 0; ch < block.getNumChannels(); ++ch)
@@ -63,9 +57,20 @@ void OscData::getNextAudioBlock(juce::dsp::AudioBlock<float>& block)
     process(juce::dsp::ProcessContextReplacing<float>(block));
 }
 
+void OscData::setWaveFrequency(const int midiNoteNumber)
+{
+    setFrequency(juce::MidiMessage::getMidiNoteInHertz (midiNoteNumber) + fmMod);
+    lastMidiNote = midiNoteNumber;
+}
+
+
 void OscData::setFmParams (const float depth, const float freq)
 {
     fmOsc.setFrequency(freq);
     fmDepth =  depth;
-    setFrequency(juce::MidiMessage::getMidiNoteInHertz (lastMidiNote) + fmMod);
+    auto currentFreq = juce::MidiMessage::getMidiNoteInHertz (lastMidiNote) + fmMod;
+    setFrequency(currentFreq >= 0 ? currentFreq : currentFreq * -1.0f);
 }
+//========================================================================================式１ ? 式２ : 式３
+//　条件演算子(三項演算子)。まず式１が評価されtrueならば式２が評価され、falseなら式３が評価されて最終的な結果となる。式２と式3は同じ型(暗黙的に変換できればOKもしくはthrow)である必要がある。C言語では?:の優先順位は代入演算子=よりも高いがC++においては同じであることに注意。
+//========================================================================================
