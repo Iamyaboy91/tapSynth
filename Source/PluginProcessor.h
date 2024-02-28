@@ -61,5 +61,7 @@ private:
     juce::AudioProcessorValueTreeState::ParameterLayout createParams();
     juce::Synthesiser synth;
     
+    
+    
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (TapSynthAudioProcessor)
 };

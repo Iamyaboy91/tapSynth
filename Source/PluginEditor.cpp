@@ -11,7 +11,7 @@
 
 //==============================================================================
 TapSynthAudioProcessorEditor::TapSynthAudioProcessorEditor (TapSynthAudioProcessor& p)
-    : AudioProcessorEditor (&p), audioProcessor (p), osc(audioProcessor.apvts, "OSC1WAVETYPE"), adsr(audioProcessor.apvts)
+    : AudioProcessorEditor (&p), audioProcessor (p), osc(audioProcessor.apvts, "OSC1WAVETYPE","FMFREQ", "FMDEPTH"), adsr(audioProcessor.apvts)
 {
     setSize (400, 300);
     addAndMakeVisible(osc);
@@ -28,13 +28,12 @@ TapSynthAudioProcessorEditor::~TapSynthAudioProcessorEditor()
 void TapSynthAudioProcessorEditor::paint (juce::Graphics& g)
 {
     g.fillAll (juce::Colours::black);
-
 }
 
 void TapSynthAudioProcessorEditor::resized()
 {
-    osc.setBounds(10, 10, 100, 30);
-    adsr.setBounds(getWidth() /2, 0, getWidth() / 2, getHeight());
+    osc.setBounds(5, 5, 200, 200); //oscに与えられた領域
+    adsr.setBounds(getWidth() / 2, 5, getWidth() / 2, getHeight() - 5);
 }
 
 

@@ -34,7 +34,8 @@ AdsrComponent::~AdsrComponent()
 void AdsrComponent::paint (juce::Graphics& g)
 {
     g.fillAll(juce::Colours::black);
-    
+    g.setColour(juce::Colours::white);
+    g.drawRoundedRectangle(0.0f, 0.0f, getWidth() - 5, getHeight(), 10.0f, 1.0f);
     
 }
 
@@ -45,7 +46,7 @@ void AdsrComponent::resized()
     const auto padding = 10;
     const auto sliderWidth = bounds.getWidth() / 4 - padding;
     const auto SliderHeight = bounds.getHeight();
-    const auto sliderStartX = 0;
+    const auto sliderStartX = bounds.getX() + 5;
     const auto SliderStartY = 0;
     
     attackSlider.setBounds(sliderStartX, SliderStartY, sliderWidth, SliderHeight);
