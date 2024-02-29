@@ -21,6 +21,7 @@ FilterComponent::FilterComponent(juce::AudioProcessorValueTreeState& apvts, juce
     filterSelectorLabel.setColour(juce::Label::ColourIds::textColourId, juce::Colours::white);
     filterSelectorLabel.setFont(15.0f);
     filterSelectorLabel.setJustificationType(juce::Justification::left);
+    addAndMakeVisible(filterSelectorLabel);
     
     setSliderWithLabels(filterCutoffSlider, filterCutoffLabel, apvts, fltCutoffId, filterCutoffAttachment);
     setSliderWithLabels(filterResonanceSlider, filterResLabel, apvts, fltResId, filterResAttachment);
@@ -37,25 +38,28 @@ void FilterComponent::paint (juce::Graphics& g)
     
     g.fillAll(juce::Colours::black);
     g.setColour(juce::Colours::white);
-    g.setFont(20);
-    g.drawText("Filters", labelSpace.withX(5), juce::Justification::topLeft);
-    g.drawRoundedRectangle(0.0f, 20.0f, getWidth() - 15, getHeight()- 50, 10.0f, 1.0f);
+    g.setFont(20.0f);
+    g.drawText("Filter", labelSpace.withX(5), juce::Justification::topLeft);
+    g.drawRoundedRectangle(0.0f, 25.0f, getWidth() - 15, getHeight()- 50, 10.0f, 1.0f);
 }
 
 void FilterComponent::resized()
 {
-    const auto sliderPosY = 80;
-    const auto sliderWidth = 100;
-    const auto sliderHeight = 60;
+    const auto bounds = getLocalBounds().reduced(25);
+    const auto sliderPosY = 50;
+    const auto sliderWidth = bounds.getWidth() / 3 ;
+    const auto sliderHeight = 90;
     const auto labelYOffset = 20;
     const auto labelHeight = 20;
     
-    filterTypeSelector.setBounds(10, 10, 90, 20);
-    filterCutoffSlider.setBounds(0, sliderPosY, sliderWidth, sliderHeight);
+    filterTypeSelector.setBounds(10, sliderPosY, sliderWidth + 5, 30);
+    filterSelectorLabel.setBounds(10, sliderPosY - labelYOffset, sliderWidth, labelHeight);
+    
+    filterCutoffSlider.setBounds(filterTypeSelector.getRight(), sliderPosY, sliderWidth, sliderHeight);
     filterCutoffLabel.setBounds(filterCutoffSlider.getX(), filterCutoffSlider.getY() - labelYOffset, filterCutoffSlider.getWidth(), labelHeight );
     
     filterResonanceSlider.setBounds(filterCutoffSlider.getRight(), sliderPosY, sliderWidth, sliderHeight);
-    filterResLabel.setBounds(filterCutoffSlider.getX() , filterResonanceSlider.getY() - labelYOffset, filterResonanceSlider.getWidth(), labelHeight );
+    filterResLabel.setBounds(filterResonanceSlider.getX() , filterResonanceSlider.getY() - labelYOffset, filterResonanceSlider.getWidth(), labelHeight );
 
 }
 
