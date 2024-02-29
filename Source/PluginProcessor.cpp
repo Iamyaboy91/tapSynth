@@ -107,6 +107,7 @@ void TapSynthAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlo
             voice -> prepareToPlay(sampleRate, samplesPerBlock, getTotalNumInputChannels());
         }
     }
+    filter.prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
 }
 
 void TapSynthAudioProcessor::releaseResources()
@@ -182,6 +183,15 @@ void TapSynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juc
     
     synth.renderNextBlock(buffer, midiMessages, 0,
                           buffer.getNumSamples());
+//    filter Stuff
+    auto& filterType =  *apvts.getRawParameterValue ( "FILTERTYPE" );
+    auto& cutoff =  *apvts.getRawParameterValue ("FILTERCUTOFF");
+    auto& resonance =  *apvts.getRawParameterValue ("FILTERRES");
+    
+    filter.updateParameters(filterType, cutoff, resonance);
+    
+    filter.process(buffer);
+    
     
 }
 
