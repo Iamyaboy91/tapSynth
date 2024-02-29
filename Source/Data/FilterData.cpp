@@ -19,12 +19,15 @@ void FilterData::prepareToPlay(double sampleRate, int samplesPerBlock, int numCh
     spec.numChannels = numChannels;
     
     filter.prepare(spec);
+    
+    isPrepared = true;
 }
 
 void FilterData::process(juce::AudioBuffer<float>& buffer)
 {
-    juce::dsp::AudioBlock<float> block { buffer };
+    jassert(isPrepared);
     
+    juce::dsp::AudioBlock<float> block { buffer };
     filter.process(juce::dsp::ProcessContextReplacing<float> { block });
 }
 
