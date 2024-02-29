@@ -25,13 +25,17 @@ public:
     void resized() override;
 
 private:
-    void setSliderParams(juce::Slider& slider);
+    void setSliderParams(juce::Slider& slider, juce::Label& label);
     
     juce::Slider attackSlider;
     juce::Slider decaySlider;
     juce::Slider sustainSlider;
     juce::Slider releaseSlider;
-
+    
+    juce::Label attackLabel {"A", "A" };
+    juce::Label decayLabel {"D", "D" };
+    juce::Label sustainLabel {"S", "S" };
+    juce::Label releaseLabel {"R", "R" };
     
     using sliderAttachment = juce::AudioProcessorValueTreeState::SliderAttachment;
     

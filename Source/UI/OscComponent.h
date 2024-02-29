@@ -25,7 +25,7 @@ public:
     void resized() override;
 
 private:
-    juce::ComboBox oscWaveSelector;
+    juce::ComboBox oscWaveSelector { "Wave Type" };
     std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> oscWaveSelectorAttachment;
     
     juce::Slider fmFreqSlider;
@@ -34,9 +34,9 @@ private:
     using Attachment = juce::AudioProcessorValueTreeState::SliderAttachment;
     
     std::unique_ptr<Attachment> fmFreqAttachment;
-    
     std::unique_ptr<Attachment> fmDepthAttachment;
     
+    juce::Label oscWaveSelectorLabel {"Wave Type", "Wave Type"};
     juce::Label fmFreqLabel {"FM Freq", "Fm Freq" };
     juce::Label fmDepthLabel {"FM Depth", "Fm Depth" };
     
