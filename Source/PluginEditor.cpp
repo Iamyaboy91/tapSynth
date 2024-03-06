@@ -14,13 +14,17 @@ TapSynthAudioProcessorEditor::TapSynthAudioProcessorEditor (TapSynthAudioProcess
 : AudioProcessorEditor (&p)
 , audioProcessor (p)
 , osc(audioProcessor.apvts, "OSC1WAVETYPE","FMFREQ", "FMDEPTH")
-,adsr(audioProcessor.apvts)
+,adsr("Amp Envelope", audioProcessor.apvts, "ATTACK", "DECAY", "SUSTAIN", "RELEASE")
 ,filter(audioProcessor.apvts, "FILTERTYPE", "FILTERCUTOFF", "FILTERRES")
+,modAdsr("Mod Envelope", audioProcessor.apvts, "MODATTACK", "MODDECAY", "MODSUSTAIN", "MODRELEASE")
+
+
 {
-    setSize (600, 500);
+    setSize (620, 500);
     addAndMakeVisible(osc);
     addAndMakeVisible(adsr);
     addAndMakeVisible(filter);
+    addAndMakeVisible(modAdsr);
     
 
     
@@ -40,10 +44,13 @@ void TapSynthAudioProcessorEditor::resized()
     const auto paddingX = 5;
     const auto paddingY = 35;
     const auto paddingY2 = 235;
+    const auto width = 300;
+    const auto height = 200;
     
-    osc.setBounds(paddingX, paddingY, 300, 200); //oscに与えられた領域
-    adsr.setBounds(osc.getRight(), paddingY, 280, 200);
-    filter.setBounds(paddingX, paddingY2, 300, 200);
+    osc.setBounds(paddingX, paddingY, width, height); //oscに与えられた領域
+    adsr.setBounds(osc.getRight(), paddingY, width, height);
+    filter.setBounds(paddingX, paddingY2, width, height);
+    modAdsr.setBounds(filter.getRight(), paddingY2, width, height);
     
 }
 
