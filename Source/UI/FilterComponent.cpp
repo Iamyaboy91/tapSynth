@@ -63,7 +63,7 @@ void FilterComponent::resized()
 
 }
 
-void FilterComponent::setSliderWithLabels(juce::Slider& slider, juce::Label &label,juce::AudioProcessorValueTreeState& apvts, juce::String paramId,  std::unique_ptr<Attachment> &attachment)
+void FilterComponent::setSliderWithLabels(juce::Slider& slider, juce::Label& label,juce::AudioProcessorValueTreeState& apvts, juce::String paramId,  std::unique_ptr<Attachment>& attachment)
 {
     slider.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     slider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, 50, 25);

@@ -12,19 +12,14 @@
 #include "AdsrComponent.h"
 
 //==============================================================================
-AdsrComponent::AdsrComponent(juce::AudioProcessorValueTreeState& apvts)
+AdsrComponent::AdsrComponent(juce::String name, juce::AudioProcessorValueTreeState& apvts, juce::String attackId, juce::String decayId,juce::String sustainId,juce::String releaseId)
 {
-    using sliderAttachment = juce::AudioProcessorValueTreeState::SliderAttachment;
+    componentName = name;
     
-    attackAttachment = std::make_unique<sliderAttachment> (apvts, "ATTACK", attackSlider);
-    decayAttachment = std::make_unique<sliderAttachment> (apvts, "DECAY", decaySlider);
-    sustainAttachment = std::make_unique<sliderAttachment> (apvts, "SUSTAIN", sustainSlider);
-    releaseAttachment = std::make_unique<sliderAttachment> (apvts, "RELEASE", releaseSlider);
-    
-    setSliderParams(attackSlider, attackLabel);
-    setSliderParams(decaySlider, decayLabel);
-    setSliderParams(sustainSlider, sustainLabel);
-    setSliderParams(releaseSlider, releaseLabel);
+    setSliderWithLabel(attackSlider, attackLabel, apvts, attackId, attackAttachment);
+    setSliderWithLabel(decaySlider, decayLabel, apvts, decayId, decayAttachment);
+    setSliderWithLabel(sustainSlider, sustainLabel, apvts, sustainId, sustainAttachment);
+    setSliderWithLabel(releaseSlider, releaseLabel, apvts, releaseId, releaseAttachment);
     
 
 }
@@ -41,8 +36,8 @@ void AdsrComponent::paint (juce::Graphics& g)
     g.fillAll(juce::Colours::black);
     g.setColour(juce::Colours::white);
     g.setFont(20);
-    g.drawText("Envelope", labelSpace.withX(5), juce::Justification::topLeft);
-    g.drawRoundedRectangle(0.0f, 25.0f, getWidth() - 15, getHeight() - 50, 10.0f, 1.0f);
+    g.drawText(componentName, labelSpace.withX(5), juce::Justification::topLeft);
+    g.drawRoundedRectangle(bounds.toFloat(), 5.0f, 2.0f);
     
 }
 
@@ -72,11 +67,13 @@ void AdsrComponent::resized()
     releaseSlider.setBounds(sustainSlider.getRight() + padding, SliderStartY, sliderWidth, SliderHeight);
     releaseLabel.setBounds(releaseSlider.getX(), releaseSlider.getY() - labelOffset, releaseSlider.getWidth(), labelHeight);
 }
-void AdsrComponent::setSliderParams(juce::Slider& slider, juce::Label& label)
+void AdsrComponent::setSliderWithLabel(juce::Slider& slider, juce::Label& label, juce::AudioProcessorValueTreeState& apvts, juce::String paramId, std::unique_ptr<Attachment>& sliderAttachment)
 {
     slider.setSliderStyle(juce::Slider::SliderStyle::LinearVertical);
     slider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, 50, 25);
     addAndMakeVisible(slider);
+    
+    sliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, paramId, slider);
     
     label.setColour(juce::Label::textColourId, juce::Colours::white);
     label.setFont(15.0f);
