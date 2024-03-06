@@ -9,6 +9,7 @@
 */
 
 #include "FilterData.h"
+
 void FilterData::prepareToPlay(double sampleRate, int samplesPerBlock, int numChannels)
 {
     filter.reset();
@@ -31,7 +32,7 @@ void FilterData::process(juce::AudioBuffer<float>& buffer)
     filter.process(juce::dsp::ProcessContextReplacing<float> { block });
 }
 
-void FilterData::updateParameters(const int filterType, const float frequency, const float resonance)
+void FilterData::updateParameters(const int filterType, const float frequency, const float resonance, const float modulator)
 {
     switch (filterType) {
         case 0:
@@ -44,7 +45,11 @@ void FilterData::updateParameters(const int filterType, const float frequency, c
             filter.setType(juce::dsp::StateVariableTPTFilterType::highpass);
             break;
     }
-    filter.setCutoffFrequency(frequency);
+    float modFreq = frequency * modulator;
+    modFreq = std::fmin (std::fmax (modFreq, 20.0f), 20000.0f);
+    
+    
+    filter.setCutoffFrequency(modFreq);
     filter.setResonance(resonance);
 }
 
