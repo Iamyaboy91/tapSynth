@@ -32,6 +32,10 @@
               file="Source/UI/FilterComponent.cpp"/>
         <FILE id="DmFVbj" name="FilterComponent.h" compile="0" resource="0"
               file="Source/UI/FilterComponent.h"/>
+        <FILE id="KhdjYE" name="MidiKeyboardComponent.cpp" compile="1" resource="0"
+              file="Source/UI/MidiKeyboardComponent.cpp"/>
+        <FILE id="TGzuwz" name="MidiKeyboardComponent.h" compile="0" resource="0"
+              file="Source/UI/MidiKeyboardComponent.h"/>
         <FILE id="JwyGg0" name="OscComponent.cpp" compile="1" resource="0"
               file="Source/UI/OscComponent.cpp"/>
         <FILE id="LOTzaP" name="OscComponent.h" compile="0" resource="0" file="Source/UI/OscComponent.h"/>

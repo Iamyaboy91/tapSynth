@@ -13,7 +13,7 @@
 #include "UI/OscComponent.h"
 #include "UI/AdsrComponent.h"
 #include "UI/FilterComponent.h"
-
+#include "UI/MidiKeyboatdComponent.h"
 
 
 //==============================================================================
