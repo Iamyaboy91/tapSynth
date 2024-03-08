@@ -26,8 +26,6 @@ TapSynthAudioProcessorEditor::TapSynthAudioProcessorEditor (TapSynthAudioProcess
     addAndMakeVisible(filter);
     addAndMakeVisible(modAdsr);
     
-
-    
 }
 TapSynthAudioProcessorEditor::~TapSynthAudioProcessorEditor()
 {

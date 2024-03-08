@@ -44,7 +44,7 @@ void OscComponent::paint (juce::Graphics& g)
     g.setColour(juce::Colours::white);
     g.setFont(20);
     g.drawText("Oscillator", labelSpace.withX(5), juce::Justification::topLeft);
-    g.drawRoundedRectangle(0.0f, 25.0f, getWidth() - 15, getHeight()- 50, 10.0f, 1.0f);
+    g.drawRoundedRectangle(bounds.toFloat(), 5.0f, 2.0f);
 
 }
 
